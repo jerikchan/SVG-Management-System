@@ -1,3 +1,3 @@
 language: node_js
-script:
+after_script:
   - npm run build
