@@ -56,7 +56,8 @@ module.exports = {
         new VueLoaderPlugin(),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            filename: '../index.html'
         })
     ],
     optimization: {
