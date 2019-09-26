@@ -47,6 +47,15 @@ module.exports = {
                 use: [
                     {
                         loader: 'svg-sprite-loader'
+                    },
+                    {
+                        loader: 'svgo-loader',
+                        options: {
+                            plugins: [
+                                { convertPathData: false },
+                                { mergePaths: false }
+                            ]
+                        }
                     }
                 ]
             }
