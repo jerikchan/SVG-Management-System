@@ -1,3 +1,4 @@
 language: node_js
 after_script:
+  - bundle exec jekyll serve
   - npm run build
