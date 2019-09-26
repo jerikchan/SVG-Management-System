@@ -3,3 +3,11 @@ node_js:
   - 10.14.0
 script:
   - npm run build
+deploy:
+  provider: pages
+  keep-history: true
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: './dist'
+  on:
+    branch: master
