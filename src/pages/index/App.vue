@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <div :class="$style.header">
+            <a target="_blank" href="preview.html">预览</a>
             <button @click="runAnime">播放</button>
             <input type="file" multiple ref="fileInput" @change="handleFiles" accept="image/svg+xml" hidden>
             <button @click="$refs.fileInput.click()">上传</button>
@@ -11,31 +12,18 @@
                 </div>
                 <div>{{ id }}</div>
             </div>
-            <!-- <div v-for="id in symbolIds" :key="id" :class="$style.wrapper">
-                <div :class="$style.svgContainer">
-                    <svg>
-                        <use :xlink:href="`#${id}`"></use>
-                    </svg>
-                </div>
-                <div>{{ id }}</div>
-            </div> -->
         </div>
     </div>
 </template>
 
 <script>
-window.anime = window.anime || require('../lib/anime.js');
+window.anime = window.anime || require('anime');
 const Site = window.Site = window.Site || {};
-require('../lib/SVGAnime.js');
-
-// const req = require.context('./assets', false, /\.svg$/);
-// const symbols = req.keys().map(req);
-// const symbolIds = symbols.map((symbol) => symbol.default.id);
+require('SVGAnime');
 
 export default {
     data() {
         return {
-            // symbolIds,
             svgList: []
         };
     },
@@ -44,9 +32,6 @@ export default {
             this.svgList.forEach(({ id }) => {
                 Site.SVGAnime.run(id);
             });
-            // this.symbolIds.forEach((id) => {
-            //     Site.SVGAnime.run(id);
-            // });
         },
         handleFiles(e) {
             Array.prototype.slice.call(e.target.files).forEach((file) => {

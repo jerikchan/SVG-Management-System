@@ -6,7 +6,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     mode: 'none',
     entry: {
-        app: './src/index.js'
+        app: './src/pages/index',
+        preview: './src/pages/preview'
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -65,20 +66,34 @@ module.exports = {
         new VueLoaderPlugin(),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/pages/index/index.html',
+            filename: 'index.html',
+            chunks: ['app']
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/pages/preview/index.html',
+            filename: 'preview.html',
+            chunks: ['preview']
         })
     ],
-    optimization: {
-        moduleIds: 'hashed',
-        runtimeChunk: 'single',
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]lib[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all'
-                }
-            }
+    // optimization: {
+    //     moduleIds: 'hashed',
+    //     runtimeChunk: 'single',
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             vendor: {
+    //                 test: /[\\/]lib[\\/]/,
+    //                 name: 'vendors',
+    //                 chunks: 'all'
+    //             }
+    //         }
+    //     }
+    // },
+    resolve: {
+        alias: {
+            'anime$': path.resolve(__dirname, './lib/anime.js'),
+            'SVGAnime$': path.resolve(__dirname, './lib/SVGAnime.js'),
+            'assets': path.resolve(__dirname, './src/assets')
         }
     }
 };
