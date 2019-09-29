@@ -9527,7 +9527,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "app" } }, [
     _c("div", { class: _vm.$style.header }, [
-      _c("button", { on: { click: _vm.runAnime } }, [_vm._v("重播")]),
+      _c("button", { on: { click: _vm.runAnime } }, [_vm._v("播放")]),
       _vm._v(" "),
       _c("input", {
         ref: "fileInput",
@@ -9641,4 +9641,4 @@ module.exports = g;
 /***/ })
 
 },[["tjUo",0,2]]]);
-//# sourceMappingURL=app.704571bafb446f4320d6.js.map
+//# sourceMappingURL=app.b9cce685061742ea8ffd.js.map
