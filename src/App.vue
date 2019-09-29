@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div :class="$style.header">
-            <button @click="runAnime">重播</button>
+            <button @click="runAnime">播放</button>
             <input type="file" multiple ref="fileInput" @change="handleFiles" accept="image/svg+xml" hidden>
             <button @click="$refs.fileInput.click()">上传</button>
         </div>
