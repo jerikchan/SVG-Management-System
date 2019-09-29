@@ -2,4 +2,4 @@
 
 SVG as a Service
 
-see [demo](//jerikchan.github.io/SVG-Management-System/dist/index.html)
+see [demo](//jerikchan.github.io/SVG-Management-System)
