@@ -4,11 +4,22 @@
             <button @click="runAnime">播放</button>
         </div>
         <div :class="$style.container">
-            <div v-for="id in symbolIds" :key="id" :class="$style.wrapper">
+            <!-- <div v-for="id in symbolIds" :key="id" :class="$style.wrapper">
                 <div :class="$style.svgContainer">
                     <svg>
                         <use :xlink:href="`#${id}`"></use>
                     </svg>
+                </div>
+                <div>{{ id }}</div>
+            </div> -->
+            <!-- <div v-for="({ id, content }) in svgs" :class="$style.wrapper">
+                <div :class="$style.svgContainer" v-html="content">
+                </div>
+                <div>{{ id }}</div>
+            </div> -->
+            <div v-for="({ id, data }) in svgResults" :class="$style.wrapper">
+                <div :class="$style.svgContainer">
+                    <svg v-html="data.content" v-bind="getAttributes(id, data)"></svg>
                 </div>
                 <div>{{ id }}</div>
             </div>
@@ -22,20 +33,49 @@ const Site = window.Site = window.Site || {};
 require('SVGAnime');
 
 const req = require.context('assets', false, /\.svg$/);
-const symbols = req.keys().map(req);
-const symbolIds = symbols.map((symbol) => symbol.default.id);
+// const symbols = req.keys().map((req));
+// const symbolIds = symbols.map((symbol) => symbol.default.id);
+
+// const svgs = req.keys().map((id) => ({
+//     id,
+//     content: req(id)
+// }));
+
+const svgResults = req.keys().map((key) => {
+    const id = key.match(/(\w+).svg/)[1];
+    return {
+        id,
+        data: req(key)
+    };
+});
 
 export default {
     data() {
         return {
-            symbolIds
+            // symbolIds
+            // svgs
+            svgResults
         };
     },
     methods: {
         runAnime() {
-            this.symbolIds.forEach((id) => {
+            // this.symbolIds.forEach((id) => {
+            //     Site.SVGAnime.run(id);
+            // });
+
+            // this.svgs.forEach(({ id }) => {
+            //     Site.SVGAnime.run(id);
+            // });
+
+            this.svgResults.forEach(({ id }) => {
                 Site.SVGAnime.run(id);
             });
+        },
+        getAttributes(id, { attributes }) {
+            return {
+                ...attributes,
+                id
+            }
         }
     },
     mounted() {
